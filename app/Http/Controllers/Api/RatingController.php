@@ -93,12 +93,12 @@ class RatingController extends Controller
         }
     }
 
-    public function destroy(Request $request, UserRating $userRating): Response
+    public function destroy(Request $request, UserRating $userRating)
     {
 
         $userRating->delete();
 
-        return response()->noContent();
+        return response()->json(['status' => 200, 'message' => 'Rating deleted successfull']);
     }
 
     //list of all products with average rating
