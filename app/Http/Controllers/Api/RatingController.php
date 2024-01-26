@@ -13,14 +13,7 @@ use App\Http\Requests\UserRatingUpdateRequest;
 
 class RatingController extends Controller
 {
-    public function index(Request $request): UserRatingCollection
-    {
-
-
-        $userRatings = UserRating::latest()->get();
-
-        return new UserRatingCollection($userRatings);
-    }
+   
 
     public function store(Request $request)
     {
