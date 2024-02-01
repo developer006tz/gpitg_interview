@@ -16,7 +16,7 @@ onMounted(() => {
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
           <RouterLink to="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">
+            <img src="/favicon.png" class="h-8" alt="Flowbite Logo">
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Dev Home</span>
           </RouterLink>
           <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -51,6 +51,8 @@ onMounted(() => {
   </div>
 </header>
 
-<main class="max-w-7xl mx-auto min-h-screen">
+<main class="max-w-7xl min-h-screen mx-auto">
   <RouterView />
-</main></template>
+
+</main>
+</template>
