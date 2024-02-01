@@ -17,6 +17,8 @@ class RatingController extends Controller
 
     public function store(Request $request)
     {
+        return response()->json(['user' => auth()->user()]);
+
 
         $rules = [
             'product_id' => ['required', 'exists:products,id'],
@@ -40,7 +42,7 @@ class RatingController extends Controller
             $checkRating = UserRating::where('product_id', $request->product_id)->where('user_id', $request->user_id)->first();
             if ($checkRating) {
                 $checkRating->update($data);
-                return response()->json(['status' => 200, 'message' => 'Rating updated successfully']);
+                return response()->json(['status' => 200, 'message' => auth()->user()->name . ' Rating updated successfully']);
             }else{
                 UserRating::create($data);
                 return response()->json(['status' => 200, 'message' => 'Rating added successfully']);
@@ -48,7 +50,7 @@ class RatingController extends Controller
 
             
         } catch (\Exception $e) {
-            return response()->json(['status' => 500, 'message' => 'Something went wrong']);
+            return response()->json(['status' => 500, 'message' => $e->getMessage().','.$e->getLine()]);
         }
 
         

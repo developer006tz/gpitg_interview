@@ -16,6 +16,8 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        
+
         if (!auth()->attempt($credentials)) {
             throw ValidationException::withMessages([
                 'email' => [trans('auth.failed')],
@@ -24,10 +26,23 @@ class AuthController extends Controller
 
         $user = User::whereEmail($request->email)->firstOrFail();
 
+        if ($user->tokens()->count() > 0) {
+            $user->tokens()->delete();
+        }
+
         $token = $user->createToken('auth-token');
 
         return response()->json([
             'token' => $token->plainTextToken,
+        ]);
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Logged out successfully',
         ]);
     }
 }
